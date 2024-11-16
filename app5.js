@@ -29,7 +29,7 @@ app.get("/luck", (req, res) => {
   else if( num==5 ) luck = '凶';
   else if( num==6 ) luck = '大凶';
   
-  res.render( 'luck', {number:num, luck:luck} );
+  res.render( 'luck', {luck:luck} );
 });
 
 app.get("/janken", (req, res) => {
