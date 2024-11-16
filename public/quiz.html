@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クイズ</title>
+</head>
+<body>
+  <h1>クリスマスは何月何日でしょう1〜3の数字を入力してください</h1>
+  <h1>１．12月25日</h1>
+  <h1>２．12月24日</h1>
+  <h1>３． 1月25日</h1>
+  <form action="/quiz-result" method="post">
+    <label for="answer">答え（1〜3の数字）:</label>
+    <input type="number" id="answer" name="answer" min="1" max="3" required>
+    <button type="submit">送信</button>
+  </form>
+</body>
+</html>
