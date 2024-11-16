@@ -3,34 +3,64 @@
 ### ファイル一覧
 ファイル名 | 説明
 -|-
-app5.js | プログラム本体
+app5.js |じゃんけん，ガチャ，おみくじ，クイズのプログラム本体
 public/janken.html | じゃんけんの開始画面
-view/janken.ejs | じゃんけんのテンプレートファイル
-```javascript
-console.log( 'Hello' );
-```
-## 仕様手順
-1. ```node app5.js```でプログラムを起動する．app5.js を起動する
-1. Webブラウザでlocalhost:8080/public/janken.htmlにアクセスする
-1. 自分の手を入力する
+public/gacha.html | ガチャの開始画面
+public/luck.html | おみくじの開始画面
+public/quiz.html | クイズの開始画面
+view/janken.ejs | じゃんけんのテンプレート，結果画面
+view/gacha-result.ejs | ガチャのテンプレート，結果画面
+view/luck.ejs | おみくじのテンプレート，結果画面
+view/quiz-result.ejs | クイズのテンプレート，結果画面
+
+## じゃんけんの仕様手順
+1. ```node app5.js```でプログラムを起動する．app5.js を起動する．
+1. Webブラウザでlocalhost:8080/public/janken.htmlにアクセスする．
+1. 自分の手を入力する.
+1. 自分の手とコンピュータの手を比較し，結果，勝数，試合数を表示する
+1. ユーザーは結果を確認し，再度じゃんけんを行うことができる．
+## じゃんけんの仕様
+　まず```app.get("/janken", (req, res) ```で/jankenというURLに対するリクエストを処理する．req.queryを使用してユーザーの手（hand），勝数（win），試合数（total）を受け取る．console.log関数でhand，win，totalの変数を定義する．
+　次に```Math.floor(Math.random() * 3 + 1)```で1〜3までのランダムな整数を生成する．そのランダムな整数に応じて，コンピュータの選択を決定する．1のときはグー，２のときはチョキ，３のときはパーとなる．ユーザの手とコンピュータの手を比較して結果を判定するために以下の仕様にする．
+・ユーザーとコンピュータの手が一緒のとき’あいこ’を表示
+・ユーザーの手がコンピュータの手に勝ったとき’勝ち’を表示し，winを１増やす．
+・ユーザーの手がコンピュータの手に負けたとき’負け’を表示
+以上の仕様を施す．判定後，totalを1増やす．
+　最後に```res.render('janken', display)```でjanken.ejsテンプレートにデータを渡し，表示する．
 ## フローチャート
-```mermaid
-flowchart TD;
-開始 --> 終了;
-```
+
 
 ```mermaid
 flowchart TD;
 
 start["開始"];
-end1["終了"]
-if{"条件に合うか"}
-win["勝ち"]
-loose["負け"]
+enter["ユーザーが自分の手を入力"];
+end1["終了"];
+if{"結果の判定"};
+if1{"判定終了"};
+win["勝ち"];
+same["あいこ"];
+loose["負け"];
+勝数を増やす["勝数を1増やす"];
+試合数を増やす["試合数を1増やす"];
 
-start --> if
-if -->|yes| win
-win --> end1
-if -->|no| loose
-loose --> end1
+start --> enter
+enter --> if
+if -->|ユーザーの手がコンピュータの手に勝つ| win
+win --> 勝数を増やす
+勝数を増やす --> if1
+if -->|ユーザーの手とコンピュータの手が同じ| same
+same --> if1
+if -->|ユーザーの手がコンピュータの手に負ける| loose
+loose --> if1
+if1 --> 試合数を増やす
+試合数を増やす --> end1
+
 ```
+## githubでの管理方法
+1. ターミナルを開く
+1. 以下のコマンドを実行する．
+＄　git add.
+＄　git commit -am'修正，追加した内容をコメント'
+＄　git push
+以上の手順によりリポジトリにも反映されgithubでの管理を可能にする．
