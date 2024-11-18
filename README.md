@@ -23,6 +23,12 @@ view/gacha-result.ejs | ガチャのテンプレート，結果画面
 view/luck.ejs | おみくじのテンプレート，結果画面
 view/quiz-result.ejs | クイズのテンプレート，結果画面
 
+## app5.jsの起動方法
+1. ターミナルを開く．
+1. ```node app5.js```を実行する．
+1. ```localhost:8080/public/XXX.html```にアクセスする．XXXは使用するプログラムに合わせて記載する．
+
+これによりapp5.jsが起動し，利用したいプログラムを使用することができる．
 ## じゃんけんの仕様手順
 1. ターミナルを開き```node app5.js```でプログラムを起動する．
 1. Webブラウザで```localhost:8080/public/janken.html```にアクセスする．
