@@ -25,6 +25,7 @@ app.post('/tasks', (req, res) => {
     const { task } = req.body;
     if (task) {
         tasks.push(task);
+        console.log(`タスク追加: ${task}`);  // ターミナルに追加したタスクを表示
         res.json({ success: true, task });
     } else {
         res.status(400).json({ success: false });
@@ -32,33 +33,35 @@ app.post('/tasks', (req, res) => {
 });
 
 // タスクを削除する
-app.post('/tasks/delete', (req, res) => {  // URLを変更して、削除をPOSTで受ける
+app.post('/tasks/delete', (req, res) => {  
   const { task } = req.body;
   const index = tasks.indexOf(task);
   if (index > -1) {
       tasks.splice(index, 1);
+      console.log(`タスク削除: ${task}`);  // ターミナルに削除したタスクを表示
       res.json({ success: true });
   } else {
       res.status(400).json({ success: false });
   }
 });
 
-//app.post("/check", (req, res) => {
-//  res.json({ number: bbs.length });
-//});
 
-//app.post("/read", (req, res) => {
-//  const start = Number(req.body.start);
-//  if (start == 0) res.json({ messages: bbs });
-//  else res.json({ messages: bbs.slice(start) });
-//});
+app.post("/check", (req, res) => {
+  res.json({ number: bbs.length });
+});
 
-//app.post("/post", (req, res) => {
-//  const name = req.body.name;
-//  const message = req.body.message;
-//  bbs.push({ name: name, message: message, id: bbs.length, likes: 0 });
-//  res.json({ number: bbs.length });
-//});
+app.post("/read", (req, res) => {
+  const start = Number(req.body.start);
+  if (start == 0) res.json({ messages: bbs });
+  else res.json({ messages: bbs.slice(start) });
+});
+
+app.post("/post", (req, res) => {
+  const name = req.body.name;
+  const message = req.body.message;
+  bbs.push({ name: name, message: message, id: bbs.length, likes: 0 });
+  res.json({ number: bbs.length });
+});
 
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
