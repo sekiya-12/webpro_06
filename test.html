@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #content { margin-top: 20px; }
+        #errorMessage { color: red; }
+    </style>
+</head>
+<body>
+    <h1>SPA - 投稿と表示</h1>
+    
+    <div id="formSection">
+        <label for="name">名前: </label>
+        <input type="text" id="name" required><br>
+        <label for="message">メッセージ: </label>
+        <textarea id="message" required></textarea><br>
+        <button id="post">投稿</button>
+    </div>
+
+    <div id="content">
+        <h2>メッセージリスト</h2>
+        <div id="bbs"></div>
+    </div>
+    
+    <div id="errorMessage"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
